@@ -26,7 +26,24 @@
     </div>
 
   <script>
-    // 👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀
+    const triggers = document.querySelectorAll('a');
+    // create hover style; creates <span class="highlight"></span>
+    const highlight = document.createElement('span');
+    highlight.classList.add('highlight');
+    document.body.append(highlight);
+
+    function highlightLink() {
+      // console.log(this);
+      // getBoundingClientRect outputs all info about where selected item is on the page (height, width, top, bottom, etc)
+      const linkCoords = this.getBoundingClientRect();
+      console.log(linkCoords);
+      // getting coords of links & transform applies highlight to correct size of hovered element
+      highlight.style.width = `${linkCoords.width}px`;
+      highlight.style.height = `${linkCoords.height}px`;
+      highlight.style.transform = `translate(${linkCoords.left}px, ${linkCoords.top}px)`;
+    }
+
+    triggers.forEach(a => a.addEventListener('mouseenter', highlightLink));
   </script>
 </body>
 </html>
