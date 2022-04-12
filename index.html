@@ -37,10 +37,17 @@
       // getBoundingClientRect outputs all info about where selected item is on the page (height, width, top, bottom, etc)
       const linkCoords = this.getBoundingClientRect();
       console.log(linkCoords);
+      const coords = {
+        width: linkCoords.width,
+        height: linkCoords.height,
+        top: linkCoords.top + window.scrollY,
+        left: linkCoords.left + window.scrollX
+      }
+      
       // getting coords of links & transform applies highlight to correct size of hovered element
-      highlight.style.width = `${linkCoords.width}px`;
-      highlight.style.height = `${linkCoords.height}px`;
-      highlight.style.transform = `translate(${linkCoords.left}px, ${linkCoords.top}px)`;
+      highlight.style.width = `${coords.width}px`;
+      highlight.style.height = `${coords.height}px`;
+      highlight.style.transform = `translate(${coords.left}px, ${coords.top}px)`;
     }
 
     triggers.forEach(a => a.addEventListener('mouseenter', highlightLink));
